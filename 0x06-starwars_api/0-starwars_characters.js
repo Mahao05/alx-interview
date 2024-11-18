@@ -1,9 +1,11 @@
 #!/usr/bin/node
-import requests
 
-r = requests.get(“https://swapi-api.alx-tools.com/api/people/”)
-r.json()
+let request = “https://swapi-api.alx-tools.com/api/people/”
 
-for result in r.json()[“results”]:
-  print(result[“name”])
-  print(“\n”)
+fetch(request).then((response) => {
+    return response.json();
+}).then( (data) => {
+    let p = document.getElementId(“Movie”);
+    console.log(data);
+    p.innerHTML = JSON.stringify(data.characters);
+})
