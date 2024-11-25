@@ -1,8 +1,13 @@
 #!/usr/bin/python3
+"""
+Test 0x07 - Rotate 2D Matrix
+"""
 from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
+
+rotate_2d_matrix = __import__('0-rotate_2d_matrix').rotate_2d_matrix
 
 def rotate_2d_matrix(matrix):
     """
@@ -44,7 +49,7 @@ def rotate_matrix_endpoint():
 
         if not all(isinstance(row, list) for row in matrix):
             return jsonify(
-                {"error": "Invalid input. Matrix rows must be lists."}
+                {"erroiir": "Invalid input. Matrix rows must be lists."}
             ), 400
 
         rotate_2d_matrix(matrix)
