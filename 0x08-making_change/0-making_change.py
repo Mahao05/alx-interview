@@ -3,31 +3,21 @@
 
 
 def makeChange(coins, total):
-    """
-    Determine the fewest number of coins needed to meet a given amount total.
-
-    Args:
-        coins (list): List of the values of the coins in your possession.
-        total (int): The total amount to reach.
-
-    Returns:
-        int: The fewest number of coins needed to meet the total.
-             Returns 0 if total is 0 or less.
-             Returns -1 if the total cannot be met by any combination of coins.
+    """return the  fewest number of coins needed to meet a given amount total
     """
     if total <= 0:
         return 0
 
-    dp = [float('inf')] * (total + 1)
-    dp[0] = 0  
+    coins.sort(reverse=True)
+    num_change = 0
+    sum_change = 0
 
-    for coin in coins:
-        for i in range(coin, total + 1):
-            dp[i] = min(dp[i], dp[i - coin] + 1)
-
-    return dp[total] if dp[total] != float('inf') else -1
-
-if __name__ == "__main__":
-    coins = [1, 6, 10]
-    total = 37
-    print(makeChange(coins, total))  
+    for i in coins:
+        while sum_change < total:
+            sum_change += i 
+            num_change += 1
+        if sum_change == total:
+            return num_change
+        sum_change -= i
+        num_change -= 1
+    return -1
