@@ -1,67 +1,23 @@
-#!/usr/bin/python3
-def isWinner(x, nums):
-    """
-    Determine the winner of the prime number game.
-    
+#!/usr/bin/python38
+def is_winner(x, nums):
+    """Determines the winner of a game of prime number elimination.
+
     Args:
-        x (int): Number of rounds.
-        nums (list of int): Array where each element is n for a given round.
-    
+        x (int): The number of rounds.
+        nums (list): A list of integers representing the `n` value for each round.
+
     Returns:
-        str: Name of the player that won the most rounds ("Maria" or "Ben").
-             If the winner cannot be determined, return None.
+        str: The name of the winner ("Maria" or "Ben"), or "None" if there's no clear winner.
     """
-
-    def sieve_of_eratosthenes(max_n):
-        """Generate prime numbers up to max_n using the Sieve of Eratosthenes."""
-        is_prime = [True] * (max_n + 1)
-        is_prime[0] = is_prime[1] = False  
-        for i in range(2, int(max_n**0.5) + 1):
-            if is_prime[i]:
-                for multiple in range(i * i, max_n + 1, i):
-                    is_prime[multiple] = False
-        return is_prime
-
-    def prime_moves_count(n, is_prime):
-        """
-        Count the number of valid prime moves for a given n.
-        
-        Args:
-            n (int): The upper limit of the range (1 to n).
-            is_prime (list of bool): List marking prime numbers up to n.
-        
-        Returns:
-            int: Total number of moves possible.
-        """
-        primes = [i for i in range(2, n + 1) if is_prime[i]]
-        moves = 0
-        used = [False] * (n + 1)
-        for prime in primes:
-            if not used[prime]:
-                moves += 1
-                for multiple in range(prime, n + 1, prime):
-                    used[multiple] = True
-        return moves
-
-    if x < 1 or not nums:
-        return None
-
-    max_n = max(nums)
-    is_prime = sieve_of_eratosthenes(max_n)
 
     maria_wins = 0
     ben_wins = 0
 
     for n in nums:
-        if n == 1:
-            ben_wins += 1  
-            continue
-
-        moves = prime_moves_count(n, is_prime)
-        if moves % 2 == 0:
-            ben_wins += 1
+        if n >= 2:
+            maria_wins += 1 
         else:
-            maria_wins += 1
+            ben_wins += 1  
 
     if maria_wins > ben_wins:
         return "Maria"
@@ -69,5 +25,3 @@ def isWinner(x, nums):
         return "Ben"
     else:
         return None
-
-
