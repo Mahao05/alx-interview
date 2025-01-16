@@ -1,49 +1,22 @@
 #!/usr/bin/python3
-"""Pascal Triangle Interview Challenge"""
+"""This module contains a function that returns a list of lists of integers"""
 
 
 def pascal_triangle(n):
-    """returns a list of lists of numbers
-    representing the pascal triangle"""
+    """
+    Generates Pascal's triangle of size n.
+    """
     if n <= 0:
         return []
 
-    pascal_t = []
-
+    triangle = []
     for i in range(n):
-        pascal_t.append([])
-        pascal_t[i].append(1)
+        row = []
+        for j in range(i + 1):
+            if j == 0 or j == i:
+                row.append(1)
+            else:
+                row.append(triangle[i - 1][j - 1] + triangle[i - 1][j])
+        triangle.append(row)
 
-        for j in range(1, i):
-            x = pascal_t[i-1][j-1]
-            y = pascal_t[i-1][j]
-            pascal_t[i].append(x+y)
-
-        if(n != 0 and i != 0):
-            pascal_t[i].append(1)
-
-    return pascal_#!/usr/bin/python3
-"""Pascal Triangle Interview Challenge"""
-
-
-def pascal_triangle(n):
-        """returns a list of lists of numbers
-            representing the pascal triangle"""
-                if n <= 0:
-                            return []
-
-                            pascal_t = []
-
-                                for i in range(n):
-                                            pascal_t.append([])
-                                                    pascal_t[i].append(1)
-
-                                                            for j in range(1, i):
-                                                                            x = pascal_t[i-1][j-1]
-                                                                                        y = pascal_t[i-1][j]
-                                                                                                    pascal_t[i].append(x+y)
-
-                                                                                                            if(n != 0 and i != 0):
-                                                                                                                            pascal_t[i].append(1)
-
-                                                                                                                                return pascal_tt
+    return triangle
